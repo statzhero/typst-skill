@@ -1,12 +1,12 @@
 # typst-skill
 
-An LLM skill for modern [Typst](https://github.com/typst/typst) typesetting (0.13+), so you no longer need to wait for LaTeX to compile.
+An LLM skill for modern [Typst](https://github.com/typst/typst) typesetting (0.14+), so you no longer need to wait for LaTeX to compile.
 
 ## What does it do?
 
 When you ask an LLM to write Typst markup, it can fall back on LaTeX habits or outdated syntax. This skill gives the model a structured reference for idiomatic Typst patterns so it produces clean, correct code with less back-and-forth.
 
-The skill covers: set and show rules, math typesetting, tables and figures, citations and bibliography, page layout and styling, custom functions, and Quarto integration. Related skills handle slides (`/touying`) and diagrams (`/write-cetz`) if installed.
+The skill covers: set and show rules, math typesetting, tables and figures, citations and bibliography, page layout and styling, custom functions, and Quarto integration. Related skills handle slides ([typst-touying-skill](https://github.com/statzhero/typst-touying-skill)) and diagrams ([typst-cetz-skill](https://github.com/statzhero/typst-cetz-skill)) if installed.
 
 ## Installation
 
