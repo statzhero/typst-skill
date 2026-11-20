@@ -5,8 +5,8 @@ description: |
 license: CC-BY-4.0
 metadata:
   author: Ulrich Atz
-  typst_version: "0.14+"
-allowed-tools: Read, Edit, Write, Grep, Glob, Bash
+  typst_version: "0.15+"
+allowed-tools: Read, Edit, Write, Grep, Glob, Bash(typst *), Bash(quarto *)
 ---
 
 # Typst Typesetting
@@ -129,6 +129,17 @@ Follow the quick reference and anti-patterns below. When in doubt, consult the r
 | `@key` for narrative citations | `#cite(<key>, form: "prose")` | Correct rendering |
 | Repeating styles per element | `#show` rules | Single source of truth |
 
+### Removed in Typst 0.15
+
+These names still appear in training data and older templates, but they error on 0.15.
+
+| Removed | Use instead |
+|---------|-------------|
+| `path(...)` for drawing | `curve(...)`; `path` is now the type for file paths |
+| `pattern(...)` | `tiling(...)` |
+| `pdf.embed(...)` | `pdf.attach(...)` |
+| `image.decode(...)` and the other `.decode` functions | Pass `bytes` to the base function, e.g. `image(bytes(svg-string))` |
+
 ## Complete workflow example
 
 ```typst
@@ -137,6 +148,7 @@ Follow the quick reference and anti-patterns below. When in doubt, consult the r
 #set par(justify: true, leading: 0.65em)
 #set page(paper: "a4", margin: (x: 2.5cm, y: 3cm))
 #set heading(numbering: "1.1")
+#set math.equation(numbering: "(1)")  // required before referencing an equation
 
 // Custom environments
 #let abstract(body) = {

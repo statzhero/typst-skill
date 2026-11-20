@@ -6,7 +6,7 @@
 #set page(
   paper: "us-letter",      // or "a4", "a5", etc.
   margin: (x: 2.5cm, y: 3cm),
-  header: [
+  header: context [         // context is required for counter(...).display()
     #set text(8pt)
     Document Title
     #h(1fr)
@@ -16,6 +16,17 @@
     Page #counter(page).display() of #counter(page).final().first()
   ],
 )
+```
+
+## Document Title
+
+Since 0.14, `title()` renders the title set in `document`, and the PDF metadata picks it up as well.
+
+```typst
+#set document(title: [Firm Size and Audit Fees], author: "Author Name")
+#show title: set text(size: 18pt)
+
+#title()
 ```
 
 ## Text Styling
@@ -144,7 +155,7 @@
 ## Variables and Logic
 
 ```typst
-#let title = "My Document"
+#let doc-name = "My Document"  // not `title`, which would shadow title()
 #let draft = true
 
 #if draft [

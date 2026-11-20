@@ -9,8 +9,26 @@
 // With explicit style
 #bibliography("references.bib", style: "apa")
 
-// Multiple bib files
+// Multiple bib files merged into one list
 #bibliography(("refs1.bib", "refs2.bib"))
+```
+
+Since 0.15, a document can contain more than one `#bibliography()`, for example one per chapter. Typst assigns each citation to the first bibliography whose `target` selects it, otherwise to the closest following bibliography that contains its key, otherwise to the closest preceding one. Numbered styles continue numbering across bibliographies unless you set `group`.
+
+```typst
+#show bibliography: set heading(offset: 1)
+#set bibliography(group: none)  // restart numbering in each bibliography
+
+= Chapter 1
+Text citing @netwok.
+#bibliography("works.bib")
+
+= Chapter 2
+Text citing @distress.
+#bibliography("works.bib")
+
+// Restrict a bibliography to citations inside one block
+#bibliography("works.bib", target: selector(cite).within(here()))  // inside a context block
 ```
 
 ## Citation Forms

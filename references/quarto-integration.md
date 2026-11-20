@@ -56,7 +56,7 @@ Create a custom format with `quarto create extension format` (select Typst) to g
   align(center)[
     #text(size: 18pt, weight: "bold")[#title]
     #v(0.5em)
-    #authors.join(", ")
+    #authors.map(a => a.name).join(", ")  // Quarto passes each author as a dictionary
   ]
   pad(x: 2em, abstract)
   body
@@ -65,11 +65,15 @@ Create a custom format with `quarto create extension format` (select Typst) to g
 
 In raw Typst blocks inside `.qmd` files, you do not have direct access to YAML metadata. Use Quarto's own cross-referencing and variable substitution instead.
 
+## Math in `.qmd` Files
+
+Write LaTeX math in the Markdown body. Pandoc parses it and converts it to Typst math, so `$\frac{\alpha}{\beta}$` becomes `$alpha / beta$`. Pandoc does not recognize Typst math in the body: `$alpha/beta$` comes out as `$a l p h a\/b e t a$`, and `$sum_(i=1)^n x_i$` fails to compile. Typst math syntax works only inside `{=typst}` raw blocks.
+
 ## Slides with Typst via Quarto
 
 ### Using Touying through Quarto
 
-For presentations, the recommended approach is using Touying (see `/touying` skill). In a Quarto context, use raw Typst blocks:
+For presentations, the recommended approach is using Touying (see `/typst-touying` skill). In a Quarto context, use raw Typst blocks. Touying 0.8 requires Typst 0.15, which Quarto 1.11 bundles:
 
 ````markdown
 ---
@@ -77,7 +81,7 @@ format: typst
 ---
 
 ```{=typst}
-#import "@preview/touying:0.6.1": *
+#import "@preview/touying:0.8.0": *
 #import themes.simple: *
 
 #show: simple-theme.with(aspect-ratio: "16-9")
@@ -103,15 +107,17 @@ See @fig-plot for the results.
 
 ## Bibliography
 
-Quarto handles bibliography through its own system, which renders correctly in Typst:
+Set the bibliography in YAML. By default, Quarto 1.11 passes it to Typst's own citation engine: `@key` becomes `#cite(<key>)` and Quarto emits `#bibliography()` at the end. `csl:` takes a Typst built-in style name such as `apa` or a path to a `.csl` file.
 
 ```yaml
 ---
 bibliography: references.bib
-csl: apa.csl
+csl: apa
 format: typst
 ---
 ```
+
+To have Pandoc's citeproc format the citations instead, for example to match HTML output exactly, add `citeproc: true` under `format: typst:`.
 
 ## Typst-Specific Options
 
@@ -129,6 +135,6 @@ format:
 
 | Avoid | Prefer | Reason |
 |-------|--------|--------|
-| LaTeX math in Typst output | Typst math syntax | Typst has its own math engine |
+| Typst math in the `.qmd` body | LaTeX math (`$\frac{a}{b}$`) | Pandoc converts LaTeX math to Typst and garbles Typst math |
 | `#bibliography()` in Quarto docs | YAML `bibliography:` key | Let Quarto handle it |
 | Mixing Quarto and Typst cross-refs | Pick one system per doc | Avoid conflicts |

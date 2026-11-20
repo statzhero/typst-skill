@@ -1,6 +1,6 @@
 # typst-skill
 
-An LLM skill for modern [Typst](https://github.com/typst/typst) typesetting (0.14+), so you no longer need to wait for LaTeX to compile.
+An LLM skill for modern [Typst](https://github.com/typst/typst) typesetting (0.15+), so you no longer need to wait for LaTeX to compile.
 
 ## What does it do?
 
@@ -46,9 +46,10 @@ Paste the contents of `SKILL.md` into your system prompt or attach it as context
 After installing, try this prompt in Claude Code:
 
 ```
-/typst
+/typst Write a two-page article with a numbered equation I can reference, a booktabs-style summary table, and an APA bibliography from refs.bib.
 ```
 
+The output should compile with `typst compile` on Typst 0.15 without errors.
 
 ## See also
 
@@ -56,4 +57,4 @@ After installing, try this prompt in Claude Code:
 
 ## License
 
-CC-BY-4.0
+[CC-BY-4.0](LICENSE)

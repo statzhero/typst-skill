@@ -31,7 +31,11 @@ $ x &= a + b \
 
 ## Equation Numbering
 
+Equations are unnumbered by default, and referencing an unnumbered equation is a compile error. Turn numbering on once at the top of the document.
+
 ```typst
+#set math.equation(numbering: "(1)")
+
 // Numbered equation (with label)
 $ E = m c^2 $ <eq-einstein>
 
@@ -39,8 +43,10 @@ $ E = m c^2 $ <eq-einstein>
 See @eq-einstein.
 
 // Suppress numbering for a single equation
-#set math.equation(numbering: none)
+#math.equation(block: true, numbering: none, $ a + b = c $)
 ```
+
+A `#set math.equation(numbering: none)` rule turns numbering off for every equation after it, so use it only to switch numbering off for the rest of a document or inside a `#[...]` scope.
 
 ## Common Patterns
 

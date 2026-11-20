@@ -78,13 +78,15 @@
 
 ```typst
 #figure(
-  image("diagram.svg", width: 80%),
+  image("diagram.svg", width: 80%, alt: "Bar chart of audit fees by firm size"),
   caption: [A descriptive caption.],
 ) <fig-diagram>
 
 // Reference
 See @fig-diagram for details.
 ```
+
+Since 0.14, Typst writes tagged, accessible PDFs by default. Give every image an `alt` description; screen readers read it in place of the image.
 
 ### Side-by-Side Figures
 
@@ -114,11 +116,12 @@ See @fig-diagram for details.
 
 ## Image Formats
 
-Typst supports SVG, PNG, JPG, and GIF. Prefer SVG for diagrams.
+Typst supports SVG, PNG, JPG, GIF, WebP, and PDF (the last two since 0.14). Prefer SVG or PDF for diagrams and plots, since both stay vector.
 
 ```typst
 #image("photo.jpg", width: 50%)
 #image("diagram.svg", width: 100%)
+#image("plot.pdf", width: 80%)
 ```
 
 ## Anti-Patterns
