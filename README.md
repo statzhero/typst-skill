@@ -46,10 +46,8 @@ Paste the contents of `SKILL.md` into your system prompt or attach it as context
 After installing, try this prompt in Claude Code:
 
 ```
-/typst Write a two-page article with a numbered equation I can reference, a booktabs-style summary table, and an APA bibliography from refs.bib.
+/typst Make an appendix table of variable definitions with columns for variable, definition, and source. Use booktabs-style rules and a caption I can reference.
 ```
-
-The output should compile with `typst compile` on Typst 0.15 without errors.
 
 ## See also
 
